@@ -51,11 +51,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Interfaces\IGenericService.cs" />
+    <Compile Include="Models\AddressDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MainService.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Models\" />
     <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
