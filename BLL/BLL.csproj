@@ -64,12 +64,11 @@
     <Compile Include="Models\AddressDTO.cs" />
     <Compile Include="Models\StreetDTO.cs" />
     <Compile Include="Models\Subdivision.cs" />
+    <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MainService.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{eda7fd12-e972-4bef-b2f9-93efa847a606}</Project>
