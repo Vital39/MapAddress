@@ -8,7 +8,7 @@ using static User.Identity.Model.AppUser;
 
 namespace User.Identity.Model
 {
-    class AppUser : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
+    public class AppUser : IdentityUser<int, CustomUserLogin, CustomUserRole, CustomUserClaim>
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }
