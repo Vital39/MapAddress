@@ -69,6 +69,10 @@
     <Folder Include="Modules\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{eda7fd12-e972-4bef-b2f9-93efa847a606}</Project>
+      <Name>DAL</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Repository\Repository.csproj">
       <Project>{981547A9-CC45-4E7C-8DDD-4F3BE7478ACD}</Project>
       <Name>Repository</Name>
