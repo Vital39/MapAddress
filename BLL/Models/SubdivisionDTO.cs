@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Models
 {
-    public class Subdivision
+    public class SubdivisionDTO
     {
         public int SubdivisionId { get; set; }
 

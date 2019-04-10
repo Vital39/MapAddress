@@ -63,12 +63,13 @@
     <Compile Include="Interfaces\IGenericService.cs" />
     <Compile Include="Models\AddressDTO.cs" />
     <Compile Include="Models\StreetDTO.cs" />
-    <Compile Include="Models\Subdivision.cs" />
+    <Compile Include="Models\SubdivisionDTO.cs" />
     <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\MainService.cs" />
     <Compile Include="Services\StreetService.cs" />
+    <Compile Include="Services\SubdivisionService.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
