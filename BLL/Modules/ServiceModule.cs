@@ -9,6 +9,6 @@ namespace BLL.Modules
 {
     public class ServiceModule : Module
     {
-        
+      
     }
 }

@@ -66,6 +66,7 @@
     <Compile Include="Models\Subdivision.cs" />
     <Compile Include="Modules\ServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\MainService.cs" />
   </ItemGroup>
   <ItemGroup />
