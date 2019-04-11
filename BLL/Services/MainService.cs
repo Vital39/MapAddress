@@ -35,18 +35,18 @@ namespace BLL.Services
 
         public DTO Add(DTO obj)
         {
-            DOMAIN film = mapper.Map<DOMAIN>(obj);
-            repository.AddOrUpdate(film);
+            DOMAIN address = mapper.Map<DOMAIN>(obj);
+            repository.AddOrUpdate(address);
             repository.Save();
-            return mapper.Map<DTO>(film);
+            return mapper.Map<DTO>(address);
         }
 
         public DTO Delete(int id)
         {
-            DOMAIN film = repository.Get(id);
-            repository.Delete(film);
+            DOMAIN address = repository.Get(id);
+            repository.Delete(address);
             repository.Save();
-            return mapper.Map<DTO>(film);
+            return mapper.Map<DTO>(address);
         }
 
         public IEnumerable<DTO> FindBy(Expression<Func<DTO, bool>> predicate)
@@ -65,8 +65,8 @@ namespace BLL.Services
 
         public DTO Get(int id)
         {
-            DOMAIN film = repository.Get(id);
-            return mapper.Map<DTO>(film);
+            DOMAIN address = repository.Get(id);
+            return mapper.Map<DTO>(address);
         }
 
         public IEnumerable<DTO> GetAll()
@@ -76,10 +76,10 @@ namespace BLL.Services
 
         public DTO Update(DTO obj)
         {
-            DOMAIN film = mapper.Map<DOMAIN>(obj);
-            repository.AddOrUpdate(film);
+            DOMAIN address = mapper.Map<DOMAIN>(obj);
+            repository.AddOrUpdate(address);
             repository.Save();
-            return mapper.Map<DTO>(film);
+            return mapper.Map<DTO>(address);
         }
     }
 }
