@@ -65,4 +65,4 @@ namespace User.Identity.Manager
         }
     }
 }
-}
+
