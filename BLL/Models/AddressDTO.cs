@@ -1,13 +1,13 @@
-namespace DAL.DbLayer
-{
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    //using System.Data.Entity.Spatial;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-    [Table("Address")]
-    public partial class Address
+namespace BLL.Models
+{
+    public class AddressDTO
     {
         public int AddressId { get; set; }
 
@@ -29,9 +29,5 @@ namespace DAL.DbLayer
         public decimal Latitude { get; set; }
 
         public decimal Longitude { get; set; }
-
-        public virtual Street Street { get; set; }
-
-        public virtual Subdivision Subdivision { get; set; }
     }
 }
