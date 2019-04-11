@@ -8,9 +8,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using User.Identity.Model;
+using User.Identity.Store;
 using static User.Identity.Model.AppUser;
 
-namespace User.Identity.Store
+namespace User.Identity.Manager
 {
     public class ApplicationRoleManager : RoleManager<AppRole, int>
     {
