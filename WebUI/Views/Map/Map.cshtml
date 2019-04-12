@@ -11,14 +11,22 @@
             <div>
                 Travel From : <input id="travelfrom" type="text" name="name" value="Chichester, UK" />
                 To : <input id="travelto" type="text" name="name" value="Goodwood aerodrone, UK" />
-                <select id="mode">
-                    <option value="DRIVING">Driving</option>
-                    <option value="WALKING">Walking</option>
-                    <option value="BICYCLING">Bicycling</option>
-                    <option value="TRANSIT">Transit</option>
-                </select>
-                <input type="button" value="Get Route" onclick="GetRoute()" />
+                @*<select id="mode">
+            <option value="DRIVING">Driving</option>
+            <option value="WALKING">Walking</option>
+            <option value="BICYCLING">Bicycling</option>
+            <option value="TRANSIT">Transit</option>
+        </select>*@
+              
+                 <fieldset class="mode">
+                    <input type="radio" name="group1" class="" value="DRIVING" checked="checked"> Driving<br>
+                    <input type="radio" name="group1" class="" value="WALKING"> Walking<br>
+                    <input type="radio" name="group1" class="" value="BICYCLING"> Bicycling<br>
+                    <input type="radio" name="group1" class="" value="TRANSIT"> Transit
+                 </fieldset>   
 
+                <input type="button" value="Get Route" onclick="GetRoute()" />
+              
             </div>
             <br />
             <div>
@@ -45,6 +53,7 @@
         var source, destination;
         var directionsDisplay;
         var directionsService = new google.maps.DirectionsService();
+        var selectedMode = "DRIVING";
 
         // initialise the location of the map on Chichester in England (ref lat and lng)
         var map = new google.maps.Map(document.getElementById('dvMap'), {
@@ -61,13 +70,15 @@
         });
 
         //новый маршрут при смене select
-        document.getElementById('mode').addEventListener('change', function () {
+        var rModeButtons = document.querySelector(".mode");
+        rModeButtons.addEventListener('change', function (e) {
+            selectedMode = e.target.value;
             GetRoute();
         });
 
         //находит маршрут
         function GetRoute() {
-            var selectedMode = document.getElementById('mode').value;
+            
             directionsDisplay.setMap(map);
 
             source = document.getElementById("travelfrom").value;
