@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Interfaces
 {
-    public interface IGenericService<DOMAIN, DTO> where DTO : class, new() where DOMAIN : class, new()
+    public interface IGenericService<DTO> where DTO : class, new() 
     {
         IEnumerable<DTO> GetAll();
         IEnumerable<DTO> FindBy(Expression<Func<DTO, bool>> predicate);

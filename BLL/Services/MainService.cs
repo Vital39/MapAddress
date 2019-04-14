@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class MainService<DOMAIN, DTO> : IGenericService<DOMAIN, DTO> where DOMAIN : class, new() where DTO : class, new()
+    public class MainService<DOMAIN, DTO> : IGenericService<DTO> where DOMAIN : class, new() where DTO : class, new()
     {
         private IGenericRepository<DOMAIN> repository;
         protected IMapper mapper;
