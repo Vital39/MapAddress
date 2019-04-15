@@ -11,7 +11,7 @@ namespace WebUI.Controllers
 {
     public class StreetController : GenericController<Street, StreetDTO>
     {
-        public StreetController(IGenericService<Street, StreetDTO> service) : base(service)
+        public StreetController(IGenericService<StreetDTO> service) : base(service)
         {
 
         }
