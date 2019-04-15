@@ -5,12 +5,14 @@ using BLL.Services;
 using DAL.DbLayer;
 using DAL.Repository;
 using Repository.Interfaces;
+using System.Data.Entity;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
 
 namespace BLL.Modules
 {
@@ -20,19 +22,19 @@ namespace BLL.Modules
         {
             //Address
             builder.RegisterType(typeof(AddressService))
-                        .As(typeof(IGenericService<Address,AddressDTO>));
+              .As(typeof(IGenericService<AddressDTO>));
             builder.RegisterType(typeof(MainRepository<Address>))
                       .As(typeof(IGenericRepository<Address>));
 
             //Street
             builder.RegisterType(typeof(StreetService))
-                        .As(typeof(IGenericService<Street, StreetDTO>));
+                        .As(typeof(IGenericService<StreetDTO>));
             builder.RegisterType(typeof(MainRepository<Street>))
                       .As(typeof(IGenericRepository<Street>));
 
             //Subdivision
             builder.RegisterType(typeof(SubdivisionService))
-                        .As(typeof(IGenericService<Subdivision, SubdivisionDTO>));
+                        .As(typeof(IGenericService<SubdivisionDTO>));
             builder.RegisterType(typeof(MainRepository<Subdivision>))
                       .As(typeof(IGenericRepository<Subdivision>));
 
