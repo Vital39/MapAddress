@@ -6,6 +6,12 @@ using DAL.DbLayer;
 using DAL.Repository;
 using Repository.Interfaces;
 using System.Data.Entity;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 
 namespace BLL.Modules
@@ -16,7 +22,7 @@ namespace BLL.Modules
         {
             //Address
             builder.RegisterType(typeof(AddressService))
-                        .As(typeof(IGenericService<AddressDTO>));
+              .As(typeof(IGenericService<AddressDTO>));
             builder.RegisterType(typeof(MainRepository<Address>))
                       .As(typeof(IGenericRepository<Address>));
 
