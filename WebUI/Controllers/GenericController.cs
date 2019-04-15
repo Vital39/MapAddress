@@ -9,9 +9,9 @@ namespace WebUI.Controllers
 {
     public class GenericController<DOMAIN,DTO> : Controller where DOMAIN : class, new() where DTO : class, new()
     {
-        private IGenericService<DOMAIN, DTO> service;
+        protected IGenericService<DTO> service;
 
-        public GenericController(IGenericService<DOMAIN, DTO> service)
+        public GenericController(IGenericService<DTO> service)
         {
             this.service = service;
         }

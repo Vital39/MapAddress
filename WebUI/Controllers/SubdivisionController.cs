@@ -11,7 +11,7 @@ namespace WebUI.Controllers
 {
     public class SubdivisionController : GenericController<Subdivision, SubdivisionDTO>
     {
-        public SubdivisionController(IGenericService<Subdivision, SubdivisionDTO> service) : base(service)
+        public SubdivisionController(IGenericService<SubdivisionDTO> service) : base(service)
         {
 
         }
