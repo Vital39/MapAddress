@@ -15,12 +15,5 @@ namespace WebUI.Controllers
         {
 
         }
-
-        public ActionResult Index()
-        {
-            var model = service.GetAll();
-            return View(model);
-        }
-        
     }
 }
