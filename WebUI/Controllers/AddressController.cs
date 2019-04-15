@@ -1,5 +1,6 @@
 ﻿using BLL.Models;
-using BLL.Interfaces;
+﻿using BLL.Interfaces;
+using DAL.DbLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,20 +9,18 @@ using System.Web.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class AddressController : Controller
+    public class AddressController : GenericController<Address, AddressDTO>
     {
-        IGenericService<AddressDTO> addressService;
-
-        public AddressController(IGenericService<AddressDTO> addressService)
-        {
-            this.addressService = addressService;
-        }
-
         // GET: Address
         public ActionResult Index()
         {
             var model = addressService.GetAll();
             return View(model);
+        }
+        
+        public AddressController(IGenericService<AddressDTO> service) : base(service)
+        {
+
         }
     }
 }
