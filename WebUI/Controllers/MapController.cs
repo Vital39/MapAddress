@@ -32,7 +32,8 @@ namespace WebUI.Controllers
         {
             return View();
         }
-        public JsonResult GetAddress(string requestStr)
+        [HttpPost]
+        public ActionResult GetAddress(string requestStr)
         {
             var streets = streetService.FindBy(x => x.StreetName.Contains(requestStr)).ToList();
             //var addresses = streets.Join(streets, ) (s => s.StreetId == addressService.FindBy(x=>x.StreetId))

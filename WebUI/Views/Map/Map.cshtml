@@ -70,35 +70,34 @@
             selectedMode = e.target.value;
             GetRoute();
         });
+
         //поиск по БД
+        $(function () {
+            //function log(message) {
+            //    $("<div>").text(message).prependTo("#log");
+            //    $("#log").scrollTop(0);
+            //}
 
-        $('#travelto').keyup(function () {
-            var req = this.value;
-            clearTimeout(timerId);
-            if (req.length == 2) {
-                timerId = setTimeout(getAddresses(req),500);
-                $("#travelto").autocomplete({
-                    source: availableTags
-                });
-            }
-
-            else if (req.length > 2) {
-                $("#travelto").autocomplete({
-                    source: availableTags
-                });
-            }
-        });
-        function getAddresses(req) {
-
-            $.getJSON("/Map/GetAddress",
-                {
-                    requestStr: req 
+            $("#travelto").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.Action("GetAddress", "Map")",
+                        type: 'POST',
+                        dataType: "json",
+                        data: {
+                            requestStr: request.term
+                        },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
                 },
-                function (data) {
-                    availableTags = data;
-
-                });
-        }
+                minLength: 2,
+                select: function (event, ui) {
+                    //log("Selected: " + ui.item.value + " aka " + ui.item.id);
+                }
+            });
+        });
 
 
         //находит маршрут
