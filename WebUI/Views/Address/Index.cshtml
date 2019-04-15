@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-warning" })
 </p>
 <table class="table">
     <tr>
@@ -41,41 +41,72 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.AddressId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubdivisionId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.House)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Serial)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.СountFloor)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.СountEntrance)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Latitude)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Longitude)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.AddressId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreetId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubdivisionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.House)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.СountFloor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.СountEntrance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Latitude)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Longitude)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-success" }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-sm btn-info" }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.AddressId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.AddressId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@section MyScripts
+{
+    <script type="text/javascript">
+
+       $(function () {
+           $('.delbutton').click(function (e) {
+               e.preventDefault();
+               if (confirm('Вы хотите удалить запись??')) {
+                    $.ajax({
+                        url: "@Url.Action("Delete", "Address")",
+                        type: 'POST',
+                        data: { id: $(this).attr('data-id') },
+                        success: function (data) {
+                            if (data == "OK") {
+                                window.location.href = "@Url.Action("Index", "Address")";
+                            }
+                            else
+                                alert("Error");
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                    });
+                }
+           });
+       });
+
+    </script>
+    }

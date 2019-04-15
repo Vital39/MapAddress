@@ -160,6 +160,7 @@
     <Content Include="Views\Address\Index.cshtml" />
     <Content Include="Views\Street\Index.cshtml" />
     <Content Include="Views\Subdivision\Index.cshtml" />
+    <Content Include="Views\Address\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
