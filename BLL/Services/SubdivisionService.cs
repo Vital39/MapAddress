@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-    public class SubdivisionService : MainService<Subdivision, SubdivisionDTO>
+    public class SubdivisionService : MainService<Subdivision, SubdivisionDTO> 
     {
         public SubdivisionService(IGenericRepository<Subdivision> repository) : base(repository)
         {

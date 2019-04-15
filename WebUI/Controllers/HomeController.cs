@@ -8,7 +8,6 @@ namespace WebUI.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Address
         public ActionResult Index()
         {
             return View();
