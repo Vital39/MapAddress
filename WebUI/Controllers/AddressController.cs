@@ -11,13 +11,6 @@ namespace WebUI.Controllers
 {
     public class AddressController : GenericController<Address, AddressDTO>
     {
-        // GET: Address
-        public ActionResult Index()
-        {
-            var model = addressService.GetAll();
-            return View(model);
-        }
-        
         public AddressController(IGenericService<AddressDTO> service) : base(service)
         {
 
