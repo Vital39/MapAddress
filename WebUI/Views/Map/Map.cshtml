@@ -1,4 +1,4 @@
-﻿
+﻿@model IEnumerable<WebUI.Models.AddressModel>
 @{
     ViewBag.Title = "Map";
 }
@@ -11,29 +11,22 @@
             <div>
                 Travel From : <input id="travelfrom" type="text" name="name" value="Chichester, UK" />
                 To : <input id="travelto" type="text" name="name" value="Goodwood aerodrone, UK" />
-                @*<select id="mode">
-            <option value="DRIVING">Driving</option>
-            <option value="WALKING">Walking</option>
-            <option value="BICYCLING">Bicycling</option>
-            <option value="TRANSIT">Transit</option>
-        </select>*@
-              
-                 <fieldset class="mode">
+                <fieldset class="mode">
                     <input type="radio" name="group1" class="" value="DRIVING" checked="checked"> Driving<br>
                     <input type="radio" name="group1" class="" value="WALKING"> Walking<br>
                     <input type="radio" name="group1" class="" value="BICYCLING"> Bicycling<br>
                     <input type="radio" name="group1" class="" value="TRANSIT"> Transit
-                 </fieldset>   
+                </fieldset>
 
                 <input type="button" value="Get Route" onclick="GetRoute()" />
-              
+
             </div>
             <br />
             <div>
                 <div id="dvDistance">
                 </div>
             </div>
-
+           
         </div>
 
         <div id="dvMap" style="min-height:500px"></div>
@@ -55,6 +48,8 @@
         var directionsService = new google.maps.DirectionsService();
         var selectedMode = "DRIVING";
 
+        var availableTags;
+        var timerId;
         // initialise the location of the map on Chichester in England (ref lat and lng)
         var map = new google.maps.Map(document.getElementById('dvMap'), {
             center: { lat: 50.834697, lng: -0.773792 },
@@ -65,20 +60,50 @@
         //подсказки в поиске
         google.maps.event.addDomListener(window, 'load', function () {
             new google.maps.places.SearchBox(document.getElementById('travelfrom'));
-            new google.maps.places.SearchBox(document.getElementById('travelto'));
+            //new google.maps.places.SearchBox(document.getElementById('travelto'));
             directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
         });
 
-        //новый маршрут при смене select
+        //новый маршрут при смене radiobutton
         var rModeButtons = document.querySelector(".mode");
         rModeButtons.addEventListener('change', function (e) {
             selectedMode = e.target.value;
             GetRoute();
         });
+        //поиск по БД
+
+        $('#travelto').keyup(function () {
+            var req = this.value;
+            clearTimeout(timerId);
+            if (req.length == 2) {
+                timerId = setTimeout(getAddresses(req),500);
+                $("#travelto").autocomplete({
+                    source: availableTags
+                });
+            }
+
+            else if (req.length > 2) {
+                $("#travelto").autocomplete({
+                    source: availableTags
+                });
+            }
+        });
+        function getAddresses(req) {
+
+            $.getJSON("/Map/GetAddress",
+                {
+                    requestStr: req 
+                },
+                function (data) {
+                    availableTags = data;
+
+                });
+        }
+
 
         //находит маршрут
         function GetRoute() {
-            
+
             directionsDisplay.setMap(map);
 
             source = document.getElementById("travelfrom").value;
