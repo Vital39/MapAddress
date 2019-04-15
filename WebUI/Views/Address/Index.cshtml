@@ -72,8 +72,7 @@
                 @Html.DisplayFor(modelItem => item.Longitude)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-success" }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @class = "btn btn-sm btn-info" }) |
+                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-success" })
                 @Html.ActionLink("Delete", "Delete", new { id = item.AddressId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.AddressId })
             </td>
         </tr>
@@ -81,7 +80,7 @@
 
 </table>
 
-@section MyScripts
+@section scripts
 {
     <script type="text/javascript">
 
