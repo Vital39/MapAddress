@@ -241,6 +241,7 @@
     <Content Include="Views\Street\Edit.cshtml" />
     <Content Include="Views\Subdivision\Edit.cshtml" />
     <Content Include="Views\Auth\LogIn.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
