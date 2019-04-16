@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using User.Identity.Model;
+using static User.Identity.Model.AppUser;
 using System.Security.Claims;
 using Microsoft.AspNet.Identity;
 using User.Identity.Manager;
