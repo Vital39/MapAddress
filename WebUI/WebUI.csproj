@@ -210,6 +210,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AuthController.cs" />
     <Compile Include="Controllers\GenericController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\AddressController.cs" />
@@ -219,7 +220,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\LogInModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -234,6 +237,7 @@
     <Content Include="Views\Street\Index.cshtml" />
     <Content Include="Views\Subdivision\Index.cshtml" />
     <Content Include="Views\Address\Edit.cshtml" />
+    <Content Include="Views\Auth\LogIn.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -243,7 +247,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
     <Folder Include="Views\Generic\" />
   </ItemGroup>
   <ItemGroup>
@@ -257,6 +260,10 @@
     <ProjectReference Include="..\DAL\DAL.csproj">
       <Project>{EDA7FD12-E972-4BEF-B2F9-93EFA847A606}</Project>
       <Name>DAL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\User.Identity\User.Identity.csproj">
+      <Project>{C8FAD2D2-07C1-4B49-9FAE-1AC00B1F124C}</Project>
+      <Name>User.Identity</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
