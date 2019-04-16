@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-warning" })
+    @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -72,7 +72,7 @@
                 @Html.DisplayFor(modelItem => item.Longitude)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-success" })
+                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-warning " })                
                 @Html.ActionLink("Delete", "Delete", new { id = item.AddressId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.AddressId })
             </td>
         </tr>
@@ -80,7 +80,7 @@
 
 </table>
 
-@section scripts
+@section DeleteAddressScript
 {
     <script type="text/javascript">
 

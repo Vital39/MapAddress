@@ -6,9 +6,14 @@ using System.Web.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class HomeController : Controller
+    public class AboutController : Controller
     {
+        // GET: About
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult About()
         {
             return View();
         }
