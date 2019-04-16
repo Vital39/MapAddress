@@ -9,6 +9,7 @@ namespace BLL.Models
 {
     public class StreetDTO
     {
+        [Key]
         public int StreetId { get; set; }
 
         [Required]

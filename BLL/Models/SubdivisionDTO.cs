@@ -9,6 +9,7 @@ namespace BLL.Models
 {
     public class SubdivisionDTO
     {
+        [Key]
         public int SubdivisionId { get; set; }
 
         [Required]
