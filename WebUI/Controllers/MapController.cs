@@ -39,13 +39,12 @@ namespace WebUI.Controllers
             //var addresses = streets.Join(streets, ) (s => s.StreetId == addressService.FindBy(x=>x.StreetId))
 
             List<string> strs = new List<string>(); /*= addressService.Ge;*/
-
+            
             foreach (var street in streets)
             {
                 strs.AddRange(addressService.FindBy(x => x.StreetId == street.StreetId).Select(x=> street.StreetName+" "+x.House));
             }
 
-           
             return Json(strs, JsonRequestBehavior.AllowGet);
         }
     }
