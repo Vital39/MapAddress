@@ -16,17 +16,17 @@
                     <input type="radio" name="group1" class="" value="WALKING"> Walking<br>
                     <input type="radio" name="group1" class="" value="BICYCLING"> Bicycling<br>
                     <input type="radio" name="group1" class="" value="TRANSIT"> Transit
-                 </fieldset>   
+                </fieldset>
 
                 <input type="button" value="Get Route" onclick="GetRoute()" />
-              
+
             </div>
             <br />
             <div>
                 <div id="dvDistance">
                 </div>
             </div>
-
+           
         </div>
 
         <div id="dvMap" style="min-height:500px"></div>
@@ -48,6 +48,8 @@
         var directionsService = new google.maps.DirectionsService();
         var selectedMode = "DRIVING";
 
+        var availableTags;
+        var timerId;
         // initialise the location of the map on Chichester in England (ref lat and lng)
         var map = new google.maps.Map(document.getElementById('dvMap'), {
             center: { lat: 50.834697, lng: -0.773792 },
@@ -58,20 +60,49 @@
         //подсказки в поиске
         google.maps.event.addDomListener(window, 'load', function () {
             new google.maps.places.SearchBox(document.getElementById('travelfrom'));
-            new google.maps.places.SearchBox(document.getElementById('travelto'));
+            //new google.maps.places.SearchBox(document.getElementById('travelto'));
             directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
         });
 
-        //новый маршрут при смене select
+        //новый маршрут при смене radiobutton
         var rModeButtons = document.querySelector(".mode");
         rModeButtons.addEventListener('change', function (e) {
             selectedMode = e.target.value;
             GetRoute();
         });
 
+        //поиск по БД
+        $(function () {
+            //function log(message) {
+            //    $("<div>").text(message).prependTo("#log");
+            //    $("#log").scrollTop(0);
+            //}
+
+            $("#travelto").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "@Url.Action("GetAddress", "Map")",
+                        type: 'POST',
+                        dataType: "json",
+                        data: {
+                            requestStr: request.term
+                        },
+                        success: function (data) {
+                            response(data);
+                        }
+                    });
+                },
+                minLength: 2,
+                select: function (event, ui) {
+                    //log("Selected: " + ui.item.value + " aka " + ui.item.id);
+                }
+            });
+        });
+
+
         //находит маршрут
         function GetRoute() {
-            
+
             directionsDisplay.setMap(map);
 
             source = document.getElementById("travelfrom").value;
