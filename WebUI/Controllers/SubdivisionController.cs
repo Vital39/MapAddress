@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class SubdivisionController : GenericController<Subdivision, SubdivisionDTO>
+    public class SubdivisionController : GenericController<SubdivisionDTO>
     {
         public SubdivisionController(IGenericService<SubdivisionDTO> service) : base(service)
         {
