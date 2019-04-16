@@ -162,6 +162,7 @@
     <Content Include="Views\Address\Edit.cshtml" />
     <Content Include="Views\About\About.cshtml" />
     <Content Include="Views\Street\Edit.cshtml" />
+    <Content Include="Views\Subdivision\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
@@ -20,20 +20,49 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubdivisionId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.SubdivisionName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubdivisionId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubdivisionName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.SubdivisionId }, new { @class = "btn btn-sm btn-warning " })
+                @Html.ActionLink("Delete", "Delete", new { id = item.SubdivisionId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.SubdivisionId })
+            </td>
+        </tr>
+    }
 
 </table>
+@section DeleteSubdivisionScript
+{
+    <script type="text/javascript">
+
+       $(function () {
+           $('.delbutton').click(function (e) {
+               e.preventDefault();
+               if (confirm('Вы хотите удалить запись??')) {
+                    $.ajax({
+                        url: "@Url.Action("Delete", "Subdivision")",
+                        type: 'POST',
+                        data: { id: $(this).attr('data-id') },
+                        success: function (data) {
+                            if (data == "OK") {
+                                window.location.href = "@Url.Action("Index", "Subdivision")";
+                            }
+                            else
+                                alert("Error");
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                    });
+                }
+           });
+       });
+
+    </script>
+}
