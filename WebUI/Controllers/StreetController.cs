@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class StreetController : GenericController<Street, StreetDTO>
+    public class StreetController : GenericController<StreetDTO>
     {
         public StreetController(IGenericService<StreetDTO> service) : base(service)
         {

@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class GenericController<DOMAIN,DTO> : Controller where DOMAIN : class, new() where DTO : class, new()
+    public class GenericController<DTO> : Controller  where DTO : class, new()
     {
         protected IGenericService<DTO> service;
 
