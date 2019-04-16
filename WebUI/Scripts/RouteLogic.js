@@ -1,6 +1,7 @@
 ﻿var source, destination;
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
+var map;
 var selectedMode = "DRIVING";
 directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
 
@@ -8,11 +9,48 @@ var tbPlaceFrom = 'travelFromDB';
 var tbPlaceTo = 'travelToDB'
 
 // initialise the location of the map on Chichester in England (ref lat and lng)
-var map = new google.maps.Map(document.getElementById('dvMap'), {
-    center: { lat: 50.834697, lng: -0.773792 },
-    zoom: 13,
-    mapTypeId: 'roadmap'
-});
+
+$(function initMap() {
+    map = new google.maps.Map(document.getElementById('dvMap'), {
+        center: { lat: -34.397, lng: 150.644 },
+        zoom: 12
+    });
+    infoWindow = new google.maps.InfoWindow;
+    var pos;
+
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+            pos = {
+                lat: position.coords.latitude,
+                lng: position.coords.longitude
+            };
+            marker = new google.maps.Marker({
+                map: map,
+                draggable: true,
+                animation: google.maps.Animation.DROP,
+                position: pos
+            });
+            map.setCenter(pos);
+            map.setZoom(11);
+        }, function () {
+            handleLocationError(true, infoWindow, map.getCenter());
+        });
+    } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, map.getCenter());
+    }
+
+})
+
+function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+    infoWindow.setPosition(pos);
+    infoWindow.setContent(browserHasGeolocation ?
+        'Error: The Geolocation service failed.' :
+        'Error: Your browser doesn\'t support geolocation.');
+    infoWindow.open(map);
+}
 
 //подсказки в поиске
 
