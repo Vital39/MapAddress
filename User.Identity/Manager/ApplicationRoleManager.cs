@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using User.Identity.Model;
 using User.Identity.Store;
+using static User.Identity.Model.AppUser;
 
 namespace User.Identity.Manager
 {
