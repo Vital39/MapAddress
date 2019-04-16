@@ -2,6 +2,10 @@
 var directionsDisplay;
 var directionsService = new google.maps.DirectionsService();
 var selectedMode = "DRIVING";
+directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+
+var tbPlaceFrom = 'travelFromDB';
+var tbPlaceTo = 'travelToDB'
 
 // initialise the location of the map on Chichester in England (ref lat and lng)
 var map = new google.maps.Map(document.getElementById('dvMap'), {
@@ -11,10 +15,67 @@ var map = new google.maps.Map(document.getElementById('dvMap'), {
 });
 
 //подсказки в поиске
+
+function setAutocompleteDB (textboxID) {
+    //function log(message) {
+    //    $("<div>").text(message).prependTo("#log");
+    //    $("#log").scrollTop(0);
+    //}
+
+    $(textboxID).autocomplete({
+        source: function (request, response) {
+            $.ajax({
+                url: "/Map/GetAddress",
+                type: 'POST',
+                dataType: "json",
+                data: {
+                    requestStr: request.term
+                },
+                success: function (data) {
+                    response(data);
+                }
+            });
+        },
+        minLength: 2,
+        select: function (event, ui) {
+            //log("Selected: " + ui.item.value + " aka " + ui.item.id);
+        }
+    });
+};
+
+$(function () {
+    $('#togleFrom').change(function () {
+        if ($(this).prop('checked')) {
+            $('#travelFromGoogle').show();
+            $('#travelFromDB').hide();
+            tbPlaceFrom = 'travelFromGoogle';
+        }
+        else {
+            $('#travelFromGoogle').hide();
+            $('#travelFromDB').show();
+            tbPlaceFrom = 'travelFromDB';
+        }
+    })
+    $('#togleTo').change(function () {
+        if ($(this).prop('checked')) {
+            $('#travelToGoogle').show();
+            $('#travelToDB').hide();
+            tbPlaceTo = 'travelToGoogle';
+        }
+        else {
+            $('#travelToGoogle').hide();
+            $('#travelToDB').show();
+            tbPlaceTo = 'travelToDB';
+        }
+    })
+})
+$('#travelToGoogle').hide();
+$('#travelFromGoogle').hide();
+setAutocompleteDB("#travelToDB");
+setAutocompleteDB("#travelFromDB");
 google.maps.event.addDomListener(window, 'load', function () {
-    new google.maps.places.SearchBox(document.getElementById('travelfrom'));
-    //new google.maps.places.SearchBox(document.getElementById('travelto'));
-    directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
+    new google.maps.places.SearchBox(document.getElementById('travelToGoogle'));
+    new google.maps.places.SearchBox(document.getElementById('travelFromGoogle'));
 });
 
 //новый маршрут при смене radiobutton
@@ -29,8 +90,8 @@ function GetRoute() {
 
     directionsDisplay.setMap(map);
 
-    source = document.getElementById("travelfrom").value;
-    destination = document.getElementById("travelto").value;
+    source = document.getElementById(tbPlaceFrom).value;
+    destination = document.getElementById(tbPlaceTo).value;
 
     var request = {
         origin: source,
