@@ -9,10 +9,14 @@
     <div class="col-md-12">
         <div>
             <div>
-                Travel From : <input id="travelfrom" type="text" name="name" value="Chichester, UK" />
-                <input type="checkbox" checked data-toggle="toggle" data-width="70" data-size="xs"data-height="20" data-on="<i class='fa fa-globe'></i>  Google" data-off="<i class='fa fa-database'></i> FromDB">
-                To : <input id="travelto" type="text" name="name" value="Goodwood aerodrone, UK" />
-                <input type="checkbox" checked data-toggle="toggle" data-width="70"  data-size="xs" data-height="20" data-on="<i class='fa fa-globe'></i>  Google" data-off="<i class='fa fa-database'></i> FromDB">
+                Travel From :
+                <input id="travelFromGoogle" type="text" name="name" placeholder="поиск в google" />
+                <input id="travelFromDB" type="text" name="name"  placeholder="поиск в бд" />
+                <input type="checkbox" id="togleFrom" data-toggle="toggle" data-offstyle="info"  data-size="sm" data-height="20" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB" >
+                To :
+                <input id="travelToGoogle" type="text" name="name" placeholder="поиск в google" />
+                <input id="travelToDB" type="text" name="name" placeholder="поиск в БД" />
+                <input type="checkbox" id="togleTo" data-toggle="toggle" data-offstyle="info" data-size="sm" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
                 <fieldset class="mode">
                     <input type="radio" name="group1" class="" value="DRIVING" checked="checked"> Driving<br>
                     <input type="radio" name="group1" class="" value="WALKING"> Walking<br>
