@@ -10,9 +10,21 @@
             <div>
                 Travel From :
                 <div class="offset-3">
-                    <input id="travelFromGoogle" type="text" name="name" placeholder="поиск в google" />
-                    <input id="travelFromDB" type="text" name="name" placeholder="поиск в бд" />
-                    <input type="checkbox" id="togleFrom" data-toggle="toggle" data-offstyle="info" data-size="sm" data-height="27" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
+                <input id="travelFromGoogle" type="text" name="name" placeholder="поиск в google" />
+                <input id="travelFromDB" type="text" name="name"  placeholder="поиск в бд" />
+                <input type="checkbox" id="togleFrom" data-toggle="toggle" data-offstyle="info" data-size="sm" data-height="27" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
+                To :
+                <input id="travelToGoogle" type="text" name="name" placeholder="поиск в google" />
+                <input id="travelToDB" type="text" name="name" placeholder="поиск в БД" />
+                <input type="checkbox" id="togleTo" data-toggle="toggle" data-offstyle="info" data-size="sm" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
+                <fieldset class="mode">
+                    <input type="radio" name="group1" class="" value="DRIVING" checked="checked"> Driving<br>
+                    <input type="radio" name="group1" class="" value="WALKING"> Walking<br>
+                    <input type="radio" name="group1" class="" value="BICYCLING"> Bicycling<br>
+                    <input type="radio" name="group1" class="" value="TRANSIT"> Transit
+                </fieldset>
+
+                <input type="button" value="Get Route" onclick="GetRoute()" />
 
                 </div>
                 <div>
@@ -43,7 +55,7 @@
                 <div id="dvDistance">
                 </div>
             </div>
-
+        </div>
         </div>
     </div>
     <div class="col-md-offset-1">
@@ -54,7 +66,5 @@
 
 @section scripts{
     <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDWKtzrxuvKJAMoJr1IsDF7dE3XNdo2MEU" type="text/javascript"></script>
-
     <script src="~/Scripts/RouteLogic.js"></script>
-
 }
