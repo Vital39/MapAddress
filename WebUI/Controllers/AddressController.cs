@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace WebUI.Controllers
 {
-    public class AddressController : GenericController<Address, AddressDTO>
+    public class AddressController : GenericController<AddressDTO>
     {
         public AddressController(IGenericService<AddressDTO> service) : base(service)
         {
