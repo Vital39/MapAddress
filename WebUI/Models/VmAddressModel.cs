@@ -20,29 +20,30 @@ namespace WebUI.Models
           
         public List<string> GetAddresses(string requestStr)
         {
-            List<string> filterAddresses=null;
-            List<AddressDTO> addresses=null;
+            List<string> filterAddresses = new List<string>();
+            List<AddressDTO> addresses=new List<AddressDTO>();
             string numHouse = Regex.Replace(requestStr, @"[^\d]+", "");
 
             var masReq=requestStr.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
           
             foreach (var item in masReq)
             {
-                var mas = addressService.FindBy(x => x.StreetName.Contains(item));
-                //addresses.AddRange(mas);
+                List<AddressDTO> mas = addressService.FindBy(x => x.StreetName.Contains(item)).ToList();
+                if(mas!=null)
+                    addresses.AddRange(mas);
 
             }
 
             if (numHouse != String.Empty)
             {
-                addresses.AddRange(addressService.FindBy(x => x.House.Contains(numHouse)));
+                addresses.AddRange(addressService.FindBy(x => x.House.Contains(numHouse)).ToList());
                 filterAddresses = addresses.FindAll(x => FilterAddress(x.House, requestStr))
                    .Select(x => x.StreetName + " " + x.House).ToList();
             }
             if (addresses != null)
             {
                 filterAddresses.AddRange(addresses.FindAll(x => FilterAddress(x.StreetName, requestStr))
-                    .Select(x => x.StreetName + " " + x.House));
+                    .Select(x => x.StreetName + " " + x.House).ToList());
 
                 filterAddresses.Sort();
                 return filterAddresses;
