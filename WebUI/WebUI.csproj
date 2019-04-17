@@ -299,6 +299,10 @@
       <Project>{EDA7FD12-E972-4BEF-B2F9-93EFA847A606}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UserIdentity\UserIdentity.csproj">
+      <Project>{de45fc5a-ae86-4470-80a1-f0a0cf6952c7}</Project>
+      <Name>UserIdentity</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
