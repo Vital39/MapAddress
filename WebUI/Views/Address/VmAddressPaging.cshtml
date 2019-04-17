@@ -1,0 +1,67 @@
+﻿@using WebUI.Models
+@using WebUI.Helpers
+@model VmAddressPaging
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Addresses.FirstOrDefault().StreetName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Addresses.FirstOrDefault().SubdivisionName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Addresses.FirstOrDefault().House)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Addresses.FirstOrDefault().Serial)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Addresses.FirstOrDefault().СountFloor)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Addresses.FirstOrDefault().СountEntrance)
+        </th>
+      
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model.Addresses)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreetName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SubdivisionName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.House)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serial)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.СountFloor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.СountEntrance)
+            </td>
+           
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-warning " })
+                @Html.ActionLink("Delete", "Delete", new { id = item.AddressId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.AddressId })
+            </td>
+        </tr>
+    }
+
+</table>
+
+@if (Model.Paging.TotalPages != 1)
+{
+    <div class="pager">
+        @Html.PageLinks(Model.Paging)
+    </div>
+}
+
