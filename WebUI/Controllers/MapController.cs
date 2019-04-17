@@ -26,7 +26,6 @@ namespace WebUI.Controllers
         [HttpPost]
         public ActionResult GetAddress(string requestStr)
         {
-            var all = service.GetAll();///////////////
             var res= addressModel.GetAddresses(requestStr);
             return Json(res, JsonRequestBehavior.AllowGet);
         }
