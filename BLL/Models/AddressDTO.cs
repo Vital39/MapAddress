@@ -12,9 +12,11 @@ namespace BLL.Models
         [Key]
         public int AddressId { get; set; }
 
-        public int StreetId { get; set; }
+        public int? StreetId { get; set; }
+        public string StreetName { get; set; }
 
-        public int SubdivisionId { get; set; }
+        public int? SubdivisionId { get; set; }
+        public string SubdivisionName { get; set; }
 
         [Required]
         [StringLength(12)]
