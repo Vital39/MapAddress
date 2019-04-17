@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using User.Identity.Model;
-using static User.Identity.Model.AppUser;
 
 namespace User.Identity.Store
 {

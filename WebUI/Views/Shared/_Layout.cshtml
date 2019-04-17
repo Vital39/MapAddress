@@ -31,6 +31,7 @@
                     @Html.ActionLink("Subdivision", "Index", "Subdivision", new { area = "" }, new { @class = "navbar-brand" })
 
                 </ul>
+                @Html.Partial("_LoginPartial")
             </div>
         </div>
     </div>
@@ -44,6 +45,6 @@
     </div>
     
     <script src="~/Scripts/bootstrap.min.js"></script>
-    @RenderSection("MyScripts", required: false)
+    @RenderSection("scripts", required: false)
 </body>
 </html>
