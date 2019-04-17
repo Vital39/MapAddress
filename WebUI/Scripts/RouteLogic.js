@@ -13,43 +13,49 @@ var tbPlaceTo = 'travelToDB'
 $(function initMap() {
     map = new google.maps.Map(document.getElementById('dvMap'), {
         center: { lat: -34.397, lng: 150.644 },
-        zoom: 12
+        zoom: 8
     });
-    infoWindow = new google.maps.InfoWindow;
-    var pos;
+    var geocoder = new google.maps.Geocoder;
+    var infowindow = new google.maps.InfoWindow;
+    var pos; 
 
-
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            marker = new google.maps.Marker({
-                map: map,
-                draggable: true,
-                animation: google.maps.Animation.DROP,
-                position: pos
-            });
-            map.setCenter(pos);
-            map.setZoom(11);
-        }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-    }
-
+    navigator.geolocation.getCurrentPosition(function (position) {
+        pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+    });
+    document.getElementById('findMe').addEventListener('click', function () {
+        geocodeLatLng(geocoder, map, infowindow, pos);
+    });
 })
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-        'Error: The Geolocation service failed.' :
-        'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(map);
+function geocodeLatLng(geocoder, map, infowindow, pos) {
+    geocoder.geocode({ 'location': pos }, function (results, status) {
+        if (status === 'OK') {
+            if (results[0]) {
+
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    map: map
+                });
+                map.setCenter(pos);
+                marker.addListener('click', function () {
+                    map.setZoom(11);
+                    //map.setCenter(marker.getPosition());
+                    infowindow.setContent(results[0].formatted_address);
+                    infowindow.open(map, marker);
+                });
+
+            } else {
+                window.alert('No results found');
+            }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
 }
 
 //подсказки в поиске
