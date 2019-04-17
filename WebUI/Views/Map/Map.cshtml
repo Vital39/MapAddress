@@ -10,54 +10,35 @@
             <div>
                 Travel From :
                 <div class="offset-3">
-                <input id="travelFromGoogle" type="text" name="name" placeholder="поиск в google" />
-                <input id="travelFromDB" type="text" name="name"  placeholder="поиск в бд" />
-                <input type="checkbox" id="togleFrom" data-toggle="toggle" data-offstyle="info" data-size="sm" data-height="27" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
-                To :
-                <input id="travelToGoogle" type="text" name="name" placeholder="поиск в google" />
-                <input id="travelToDB" type="text" name="name" placeholder="поиск в БД" />
-                <input type="checkbox" id="togleTo" data-toggle="toggle" data-offstyle="info" data-size="sm" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
-                <fieldset class="mode">
-                    <input type="radio" name="group1" class="" value="DRIVING" checked="checked"> Driving<br>
-                    <input type="radio" name="group1" class="" value="WALKING"> Walking<br>
-                    <input type="radio" name="group1" class="" value="BICYCLING"> Bicycling<br>
-                    <input type="radio" name="group1" class="" value="TRANSIT"> Transit
-                </fieldset>
-
-                <input type="button" value="Get Route" onclick="GetRoute()" />
-
-                </div>
-                <div>
-                    <br />
+                    <input id="travelFromGoogle" type="text" name="name" placeholder="поиск в google" />
+                    <input id="travelFromDB" type="text" name="name"  placeholder="поиск в бд" />
+                    <input type="checkbox" id="togleFrom" data-toggle="toggle" data-offstyle="info" data-size="sm" data-height="27" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
                     To :
-                    <div class="offset-3">
-                        <input id="travelToGoogle" type="text" name="name" placeholder="поиск в google" />
-                        <input id="travelToDB" type="text" name="name" placeholder="поиск в БД" />
-                        <input type="checkbox" id="togleTo" data-toggle="toggle" data-offstyle="info" data-height="27" data-size="sm" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
-                    </div>
+                    <input id="travelToGoogle" type="text" name="name" placeholder="поиск в google" />
+                    <input id="travelToDB" type="text" name="name" placeholder="поиск в БД" />
+                    <input type="checkbox" id="togleTo" data-toggle="toggle" data-offstyle="info" data-size="sm" data-on="<i class='fa fa-globe'></i> Google" data-off="<i class='fa fa-database'></i> FromDB">
+                    <fieldset class="mode">
+                        <input type="radio" name="group1" class="form-check-input" value="DRIVING" checked="checked"> Driving<br>
+                        <input type="radio" name="group1" class="form-check-input" value="WALKING"> Walking<br>
+                        <input type="radio" name="group1" class="form-check-input" value="BICYCLING"> Bicycling<br>
+                        <input type="radio" name="group1" class="form-check-input" value="TRANSIT"> Transit
+                    </fieldset>
+
+               
                 </div>
-                <br />
-                <fieldset class="mode">
-                    <div class="btn-group" role="group">
-                        <button type="button" class="btn">Driving</button>
-                        <button type="button" class="btn">Walking</button>
-                        <button type="button" class="btn">Bicycling</button>
-                        <button type="button" class="btn">Transit</button>
-                    </div>
-                </fieldset>
-                <br />
+
                 <div class="btn-group">
-                    <button type="button" class="btn" onclick="GetRoute()">Get Route</button>
+                    <button type="button" class="btn btn-primary" onclick="GetRoute()">Get Route</button>
                 </div>
             </div>
             <br />
             <div>
                 <div id="dvDistance">
                 </div>
-            </div>
         </div>
+    </div>
         
-        </div>
+        
     </div>
     <div class="col-md-offset-1">
         <div id="dvMap" style="min-height:400px"></div>
