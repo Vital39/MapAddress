@@ -13,6 +13,7 @@ namespace WebUI.Controllers
 {
     public class AuthController : Controller
     {
+        int fix = 0;
         private readonly UserManager<AppUser, int> userManager;
 
         public AuthController()
