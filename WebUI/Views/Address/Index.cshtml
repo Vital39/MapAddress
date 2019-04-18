@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-success" })
 </p>
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.StreetName)
@@ -60,7 +60,7 @@
         </tr>
     }
 
-</table>
+</table>*@
 
 <div id="addresses">
 
@@ -70,7 +70,17 @@
 {
     <script type="text/javascript">
 
-       $(function () {
+        $(function () {
+            $('#addresses').load("@Url.Action("VmAddressPaging", "Address")");
+
+            $('body').on('click', '.mybtnpaging', function () {
+
+                $("#addresses").load("@Url.Action("VmAddressPaging", "Address")",
+                     {
+                         currentPage: $(this).text()
+                     });
+            });
+
            $('.delbutton').click(function (e) {
                e.preventDefault();
                if (confirm('Вы хотите удалить запись??')) {

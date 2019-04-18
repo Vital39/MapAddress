@@ -4,6 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link href="~/Content/Preloader/stylePreloader.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="">
@@ -40,8 +41,7 @@
                     <li class="nav-item ">
                         @Html.ActionLink("About", "About", "About", new { area = "" }, new { @class = "nav-link" })
                     </li>
-                   
-                 
+              
                 </ul>
                 <div class="btn-group col-xs-2 col-sm-2 col-md-2 col-lg-2 justify-content-end">
                     @Html.Partial("_LoginPartial")
@@ -51,7 +51,6 @@
         </nav>
     @*</div>*@
 
-
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -60,9 +59,35 @@
         </footer>
     </div>
 
+    <div id="hellopreloader">
+        <div id="hellopreloader_preload"></div>
+        <p>
+            <a href="http://hello-site.ru"></a>
+        </p>
+    </div>
+
+    <script src="~/Scripts/Preloader/preloaderScript.js"></script>
+
     @RenderSection("scripts", required: false)
     @RenderSection("DeleteAddressScript", required: false)
     @RenderSection("DeleteStreetScript", required: false)
     @RenderSection("DeleteSubdivisionScript", required: false)
+    <style>
+            #hellopreloader > p {
+                display: none;
+            }
+            #hellopreloader_preload {
+                display: block;
+                position: fixed;
+                z-index: 99999;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                min-width: 1000px;
+                background: #2574A9 url(http://hello-site.ru//main/images/preloads/audio.svg) center center no-repeat;
+                background-size: 41px;
+            }
+        </style>
 </body>
 </html>
