@@ -1,39 +1,63 @@
 ﻿@model IEnumerable<BLL.Models.StreetDTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List of Street";
 }
 
-<h2>Index</h2>
+<h2>List of Street</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-success" })
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StreetId)
-        </th>
         <th>
             @Html.DisplayNameFor(model => model.StreetName)
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetId)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.StreetName)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StreetName)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.StreetId }, new { @class = "btn btn-sm btn-warning " })
+                @Html.ActionLink("Delete", "Delete", new { id = item.StreetId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.StreetId })
+            </td>
+        </tr>
+    }
 
 </table>
+
+@section DeleteStreetScript
+{
+    <script type="text/javascript">
+
+       $(function () {
+           $('.delbutton').click(function (e) {
+               e.preventDefault();
+               if (confirm('Вы хотите удалить запись??')) {
+                    $.ajax({
+                        url: "@Url.Action("Delete", "Street")",
+                        type: 'POST',
+                        data: { id: $(this).attr('data-id') },
+                        success: function (data) {
+                            if (data == "OK") {
+                                window.location.href = "@Url.Action("Index", "Street")";
+                            }
+                            else
+                                alert("Error");
+                        },
+                        error: function (data) {
+                            alert(data);
+                        }
+                    });
+                }
+           });
+       });
+
+    </script>
+}

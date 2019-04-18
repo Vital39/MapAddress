@@ -16,7 +16,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Modules
 {
-    public class ServiceModule : Module
+    public partial class ServiceModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
@@ -38,6 +38,7 @@ namespace BLL.Modules
             builder.RegisterType(typeof(MainRepository<Subdivision>))
                       .As(typeof(IGenericRepository<Subdivision>));
 
+            
             builder.RegisterType(typeof(AddressContext))
                      .As(typeof(DbContext)).InstancePerLifetimeScope();
         }
