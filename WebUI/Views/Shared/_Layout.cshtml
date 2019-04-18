@@ -7,6 +7,10 @@
     <link href="~/Content/Preloader/stylePreloader.css" rel="stylesheet" type="text/css">
     <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link rel="shortcut icon" href="">
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css">
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
 </head>
 <body>   
@@ -37,13 +41,15 @@
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
     </div>
+
     <div id="hellopreloader">
         <div id="hellopreloader_preload"></div>
         <p>
             <a href="http://hello-site.ru"></a>
         </p>
     </div>
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+    
     <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/Preloader/preloaderScript.js"></script>
     @RenderSection("scripts", required: false)
