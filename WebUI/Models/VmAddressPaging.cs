@@ -15,14 +15,19 @@ namespace WebUI.Models
         private IEnumerable<AddressDTO> addresses;
         public PagingInfo Paging { get; set; }
         public int CurrentPageProp { private get; set; }
+        public int Count {  get; private set; }
+
 
 
         public VmAddressPaging(IGenericService<AddressDTO> addressesService)
         {
             this.addressesService = addressesService;
-            addresses = addressesService.FindBy(Predicate);
             Paging = new PagingInfo() { ItemsPerPage = 20, CurrentPage = CurrentPageProp };
-            Paging.TotalItems = addresses.Count();
+            //
+
+            Paging.TotalItems = Count;
+            Paging.TotalItems = addressesService.GetAll().Count();
+            addresses = addressesService.FindBy(Predicate);
         }
 
 

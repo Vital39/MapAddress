@@ -23,7 +23,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Addresses.FirstOrDefault().СountEntrance)
         </th>
-      
+
         <th></th>
     </tr>
 
@@ -48,7 +48,7 @@
             <td>
                 @Html.DisplayFor(modelItem => item.СountEntrance)
             </td>
-           
+
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-warning " })
                 @Html.ActionLink("Delete", "Delete", new { id = item.AddressId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.AddressId })
