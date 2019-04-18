@@ -1,8 +1,10 @@
 ﻿using BLL.Interfaces;
 using BLL.Models;
+using LinqKit;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Web;
 
 namespace WebUI.Models
@@ -12,13 +14,20 @@ namespace WebUI.Models
         private IGenericService<AddressDTO> addressesService;
         private IEnumerable<AddressDTO> addresses;
         public PagingInfo Paging { get; set; }
+        public int CurrentPageProp { private get; set; }
+        public int Count {  get; private set; }
 
-        public VmAddressPaging(IGenericService<AddressDTO> addressesService, int currentPage)
+
+
+        public VmAddressPaging(IGenericService<AddressDTO> addressesService)
         {
             this.addressesService = addressesService;
-            addresses = addressesService.GetAll();
-            Paging = new PagingInfo() { ItemsPerPage = 10, CurrentPage = currentPage };
-            Paging.TotalItems = addresses.Count();
+            Paging = new PagingInfo() { ItemsPerPage = 20, CurrentPage = CurrentPageProp };
+            //
+
+            Paging.TotalItems = Count;
+            Paging.TotalItems = addressesService.GetAll().Count();
+            addresses = addressesService.FindBy(Predicate);
         }
 
 
@@ -27,6 +36,16 @@ namespace WebUI.Models
             get
             {
                 return addresses.OrderBy(c => c.StreetName).Skip((Paging.CurrentPage - 1) * Paging.ItemsPerPage).Take(Paging.ItemsPerPage);
+            }
+        }
+
+        Expression<Func<AddressDTO, bool>> Predicate
+        {
+            get
+            {
+                var predicate = PredicateBuilder.New<AddressDTO>(true);
+                predicate = predicate.And(c => c.AddressId <= CurrentPageProp * Paging.ItemsPerPage && c.AddressId > CurrentPageProp * Paging.ItemsPerPage - Paging.ItemsPerPage);
+                return predicate;
             }
         }
     }

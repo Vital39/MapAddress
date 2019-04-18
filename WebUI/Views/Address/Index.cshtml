@@ -9,58 +9,6 @@
 <p>
     @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-success" })
 </p>
-@*<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.StreetName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubdivisionName)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.House)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Serial)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.СountFloor)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.СountEntrance)
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.StreetName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubdivisionName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.House)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Serial)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.СountFloor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.СountEntrance)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-warning " })
-                @Html.ActionLink("Delete", "Delete", new { id = item.AddressId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.AddressId })
-            </td>
-        </tr>
-    }
-
-</table>*@
 
 <div id="addresses">
 
