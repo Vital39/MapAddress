@@ -12,28 +12,44 @@
     <script src="~/Scripts/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/css/bootstrap4-toggle.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.4.0/js/bootstrap4-toggle.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    @Html.ActionLink("Map", "Map", "Map", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Address", "Index", "Address", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Street", "Index", "Street", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("Subdivision", "Index", "Subdivision", new { area = "" }, new { @class = "navbar-brand" })
-                    @Html.ActionLink("About", "About", "About", new { area = "" }, new { @class = "navbar-brand" })
+    @*<div class="container">*@
+        <nav class="navbar sticky-top navbar-expand-lg justify-content-between navbar-dark bg-primary"
+             style="display: block;">
+            <div class="row ">
+                <a class="navbar-brand col-xs-2 col-sm-2 col-md-2 col-lg-2" href="#" style="margin-right: 0rem;">
+                    <img src="globe-icon.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                    Window to the world
+                </a>
+
+                <ul class="navbar-nav col-xs-7 col-sm-7 col-md-7 col-lg-7" style="max-height:20px;">
+                    <li class="nav-item active">
+                        @Html.ActionLink("Map", "Map", "Map", new { area = "" }, new { @class = "nav-link" })
+                        @*<a class="nav-link" href="#">Map <span class="sr-only">(current)</span></a>*@
+                    </li>
+                    <li class="nav-item ">
+                        @Html.ActionLink("Address", "Index", "Address", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ">
+                        @Html.ActionLink("Street", "Index", "Street", new { area = "" }, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item ">
+                        @Html.ActionLink("About", "About", "About", new { area = "" }, new { @class = "nav-link" })
+                    </li>           
                 </ul>
+                <div class="btn-group col-xs-2 col-sm-2 col-md-2 col-lg-2 justify-content-end">
+                    @Html.Partial("_LoginPartial")
+                </div>
             </div>
-        </div>
-    </div>
+
+        </nav>
+    @*</div>*@
+
     <div class="container body-content">
         @RenderBody()
         <hr />
@@ -48,8 +64,8 @@
             <a href="http://hello-site.ru"></a>
         </p>
     </div>
-    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/Preloader/preloaderScript.js"></script>
+
     @RenderSection("scripts", required: false)
     @RenderSection("DeleteAddressScript", required: false)
     @RenderSection("DeleteStreetScript", required: false)
