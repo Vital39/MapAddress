@@ -15,10 +15,16 @@
 }
 else
 {
-    <ul class="nav navbar-nav navbar-right">
-        <li>@Html.ActionLink("Register", "Register", "Auth", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
-        <li>@Html.ActionLink("Log in", "LogIn", "Auth", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    </ul>
+    <a href="@Url.Action("Register","Auth",routeValues: null)" class="btn btn-light ">
+        Войти
+        <i class="fas fa-sign-in-alt"></i>
+    </a>
+
+    <a href="@Url.Action("LogIn","Auth",routeValues: null)" class="btn btn-light " data-toggle="tooltip"
+       data-placement="bottom" title="добавить в корзину">
+        Регистрация
+        <i class="fas fa-user-alt"></i>
+    </a>
 }
 
 
