@@ -6,7 +6,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Web;
 using System.Web.Mvc;
-using User.Identity.Model;
+using UserIdentity.Model;
 using WebUI.Models;
 
 namespace WebUI.Controllers

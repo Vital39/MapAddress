@@ -4,9 +4,9 @@ using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using User.Identity.Manager;
-using User.Identity.Model;
-using User.Identity.Store;
+using UserIdentity.Manager;
+using UserIdentity.Model;
+using UserIdentity.Store;
 
 [assembly: OwinStartup(typeof(WebUI.Startup))]
 

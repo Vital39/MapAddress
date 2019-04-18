@@ -9,23 +9,16 @@ using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-    public class MapController : Controller
+    public class MapController : GenericController<AddressDTO>
     {
-        AddressModel addressModel;
+        VmAddressModel addressModel;
+      
 
-        public MapController(IGenericService<AddressDTO> addressService, IGenericService<StreetDTO> streetService, IGenericService<SubdivisionDTO> subdivisionService)
+        public MapController(IGenericService<AddressDTO> service) : base(service)
         {
-            addressModel = new AddressModel(addressService, streetService, subdivisionService);
-         
+            addressModel = new VmAddressModel(service);
         }
 
-
-
-        // GET: Map
-        public ActionResult Index()
-        {
-            return View();
-        }
         public ActionResult Map()
         {
             return View();

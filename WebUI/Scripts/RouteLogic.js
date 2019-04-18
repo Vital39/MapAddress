@@ -5,51 +5,57 @@ var map;
 var selectedMode = "DRIVING";
 directionsDisplay = new google.maps.DirectionsRenderer({ 'draggable': true });
 
-var tbPlaceFrom = 'travelFromDB';
-var tbPlaceTo = 'travelToDB'
+var tbPlaceFrom ;
+var tbPlaceTo;
 
 // initialise the location of the map on Chichester in England (ref lat and lng)
 
 $(function initMap() {
     map = new google.maps.Map(document.getElementById('dvMap'), {
         center: { lat: -34.397, lng: 150.644 },
-        zoom: 12
+        zoom: 8
     });
-    infoWindow = new google.maps.InfoWindow;
-    var pos;
+    var geocoder = new google.maps.Geocoder;
+    var infowindow = new google.maps.InfoWindow;
+    var pos; 
 
-
-    // Try HTML5 geolocation.
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(function (position) {
-            pos = {
-                lat: position.coords.latitude,
-                lng: position.coords.longitude
-            };
-            marker = new google.maps.Marker({
-                map: map,
-                draggable: true,
-                animation: google.maps.Animation.DROP,
-                position: pos
-            });
-            map.setCenter(pos);
-            map.setZoom(11);
-        }, function () {
-            handleLocationError(true, infoWindow, map.getCenter());
-        });
-    } else {
-        // Browser doesn't support Geolocation
-        handleLocationError(false, infoWindow, map.getCenter());
-    }
-
+    navigator.geolocation.getCurrentPosition(function (position) {
+        pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+        };
+    });
+    document.getElementById('findMe').addEventListener('click', function () {
+        geocodeLatLng(geocoder, map, infowindow, pos);
+    });
 })
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-        'Error: The Geolocation service failed.' :
-        'Error: Your browser doesn\'t support geolocation.');
-    infoWindow.open(map);
+function geocodeLatLng(geocoder, map, infowindow, pos) {
+    geocoder.geocode({ 'location': pos }, function (results, status) {
+        if (status === 'OK') {
+            if (results[0]) {
+
+                var marker = new google.maps.Marker({
+                    position: pos,
+                    draggable: true,
+                    animation: google.maps.Animation.DROP,
+                    map: map
+                });
+                map.setCenter(pos);
+                marker.addListener('click', function () {
+                    map.setZoom(11);
+                    //map.setCenter(marker.getPosition());
+                    infowindow.setContent(results[0].formatted_address);
+                    infowindow.open(map, marker);
+                });
+
+            } else {
+                window.alert('No results found');
+            }
+        } else {
+            window.alert('Geocoder failed due to: ' + status);
+        }
+    });
 }
 
 //подсказки в поиске
@@ -59,7 +65,7 @@ function setAutocompleteDB (textboxID) {
     //    $("<div>").text(message).prependTo("#log");
     //    $("#log").scrollTop(0);
     //}
-
+    var eventRes;
     $(textboxID).autocomplete({
         source: function (request, response) {
             $.ajax({
@@ -76,9 +82,14 @@ function setAutocompleteDB (textboxID) {
         },
         minLength: 2,
         select: function (event, ui) {
-            //log("Selected: " + ui.item.value + " aka " + ui.item.id);
+            if (textboxID == "#travelToDB")
+                tbPlaceTo = ui.item.value;
+            else if (textboxID == "#travelFromDB")
+                tbPlaceFrom = ui.item.value;
+            GetRoute();
         }
     });
+    return eventRes;
 };
 
 $(function () {
@@ -86,24 +97,24 @@ $(function () {
         if ($(this).prop('checked')) {
             $('#travelFromGoogle').show();
             $('#travelFromDB').hide();
-            tbPlaceFrom = 'travelFromGoogle';
+            
         }
         else {
             $('#travelFromGoogle').hide();
             $('#travelFromDB').show();
-            tbPlaceFrom = 'travelFromDB';
+           
         }
     })
     $('#togleTo').change(function () {
         if ($(this).prop('checked')) {
             $('#travelToGoogle').show();
             $('#travelToDB').hide();
-            tbPlaceTo = 'travelToGoogle';
+           
         }
         else {
             $('#travelToGoogle').hide();
             $('#travelToDB').show();
-            tbPlaceTo = 'travelToDB';
+           
         }
     })
 })
@@ -111,10 +122,10 @@ $('#travelToGoogle').hide();
 $('#travelFromGoogle').hide();
 setAutocompleteDB("#travelToDB");
 setAutocompleteDB("#travelFromDB");
-google.maps.event.addDomListener(window, 'load', function () {
-    new google.maps.places.SearchBox(document.getElementById('travelToGoogle'));
-    new google.maps.places.SearchBox(document.getElementById('travelFromGoogle'));
-});
+var searchBox1 = new google.maps.places.SearchBox(document.getElementById('travelToGoogle'));
+var searchBox2 = new google.maps.places.SearchBox(document.getElementById('travelFromGoogle'));
+searchBox1.addListener('places_changed', function () { tbPlaceTo = document.getElementById('travelToGoogle').value; GetRoute(); });
+searchBox2.addListener('places_changed', function () { tbPlaceFrom = document.getElementById('travelFromGoogle').value; GetRoute(); });
 
 //новый маршрут при смене radiobutton
 var rModeButtons = document.querySelector(".mode");
@@ -128,8 +139,8 @@ function GetRoute() {
 
     directionsDisplay.setMap(map);
 
-    source = document.getElementById(tbPlaceFrom).value;
-    destination = document.getElementById(tbPlaceTo).value;
+    source = tbPlaceFrom;
+    destination = tbPlaceTo;
 
     var request = {
         origin: source,

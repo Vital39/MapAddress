@@ -245,9 +245,11 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\PageLinks.cs" />
-    <Compile Include="Models\AddressModel.cs" />
+    <Compile Include="Models\VmAddressModel.cs" />
     <Compile Include="Models\PagingInfo.cs" />
     <Compile Include="Models\LogInModel.cs" />
+    <Compile Include="Models\RegisterModel.cs" />
+    <Compile Include="Models\VmAddressPaging.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -277,6 +279,7 @@
     <Content Include="Views\Subdivision\Edit.cshtml" />
     <Content Include="Views\Auth\LogIn.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Address\VmAddressPaging.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -286,7 +289,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Generic\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
@@ -300,9 +302,9 @@
       <Project>{EDA7FD12-E972-4BEF-B2F9-93EFA847A606}</Project>
       <Name>DAL</Name>
     </ProjectReference>
-    <ProjectReference Include="..\User.Identity\User.Identity.csproj">
-      <Project>{C8FAD2D2-07C1-4B49-9FAE-1AC00B1F124C}</Project>
-      <Name>User.Identity</Name>
+    <ProjectReference Include="..\UserIdentity\UserIdentity.csproj">
+      <Project>{de45fc5a-ae86-4470-80a1-f0a0cf6952c7}</Project>
+      <Name>UserIdentity</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
