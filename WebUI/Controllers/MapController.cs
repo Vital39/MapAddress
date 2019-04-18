@@ -5,29 +5,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using WebUI.Models;
 
 namespace WebUI.Controllers
 {
-    public class MapController : Controller
+    public class MapController : GenericController<AddressDTO>
     {
-        IGenericService<AddressDTO> addressService;
-        IGenericService<StreetDTO> streetService;
-        IGenericService<SubdivisionDTO> subdivisionService;
+        VmAddressModel addressModel;
+      
 
-        public MapController(IGenericService<AddressDTO> addressService, IGenericService<StreetDTO> streetService, IGenericService<SubdivisionDTO> subdivisionService)
+        public MapController(IGenericService<AddressDTO> service) : base(service)
         {
-            this.addressService = addressService;
-            this.streetService = streetService;
-            this.subdivisionService = subdivisionService;
+            addressModel = new VmAddressModel(service);
         }
 
-
-
-        // GET: Map
-        public ActionResult Index()
-        {
-            return View();
-        }
         public ActionResult Map()
         {
             return View();
@@ -35,18 +26,9 @@ namespace WebUI.Controllers
         [HttpPost]
         public ActionResult GetAddress(string requestStr)
         {
-            var streets = streetService.FindBy(x => x.StreetName.Contains(requestStr)).ToList();
-            //var addresses = streets.Join(streets, ) (s => s.StreetId == addressService.FindBy(x=>x.StreetId))
-
-            List<string> strs = new List<string>(); /*= addressService.Ge;*/
-
-            foreach (var street in streets)
-            {
-                strs.AddRange(addressService.FindBy(x => x.StreetId == street.StreetId).Select(x=> street.StreetName+" "+x.House));
-            }
-
-           
-            return Json(strs, JsonRequestBehavior.AllowGet);
+            var res= addressModel.GetAddresses(requestStr);
+            return Json(res, JsonRequestBehavior.AllowGet);
         }
+
     }
 }

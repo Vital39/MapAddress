@@ -1,24 +1,21 @@
 ﻿@model IEnumerable<BLL.Models.AddressDTO>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "List of Addresses";
 }
 
-<h2>Index</h2>
+<h2>List of Addresses</h2>
 
 <p>
     @Html.ActionLink("Create New", "Edit", new { id = 0 }, new { @class = "btn btn-success" })
 </p>
-<table class="table">
+@*<table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.AddressId)
+            @Html.DisplayNameFor(model => model.StreetName)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.StreetId)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.SubdivisionId)
+            @Html.DisplayNameFor(model => model.SubdivisionName)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.House)
@@ -32,12 +29,6 @@
         <th>
             @Html.DisplayNameFor(model => model.СountEntrance)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Latitude)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Longitude)
-        </th>
         <th></th>
     </tr>
 
@@ -45,13 +36,10 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.AddressId)
+                @Html.DisplayFor(modelItem => item.StreetName)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StreetId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SubdivisionId)
+                @Html.DisplayFor(modelItem => item.SubdivisionName)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.House)
@@ -66,25 +54,33 @@
                 @Html.DisplayFor(modelItem => item.СountEntrance)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Latitude)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Longitude)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-warning " })                
+                @Html.ActionLink("Edit", "Edit", new { id = item.AddressId }, new { @class = "btn btn-sm btn-warning " })
                 @Html.ActionLink("Delete", "Delete", new { id = item.AddressId }, new { @class = "btn btn-sm btn-danger delbutton", data_id = item.AddressId })
             </td>
         </tr>
     }
 
-</table>
+</table>*@
+
+<div id="addresses">
+
+</div>
 
 @section DeleteAddressScript
 {
     <script type="text/javascript">
 
-       $(function () {
+        $(function () {
+            $('#addresses').load("@Url.Action("VmAddressPaging", "Address")");
+
+            $('body').on('click', '.mybtnpaging', function () {
+
+                $("#addresses").load("@Url.Action("VmAddressPaging", "Address")",
+                     {
+                         currentPage: $(this).text()
+                     });
+            });
+
            $('.delbutton').click(function (e) {
                e.preventDefault();
                if (confirm('Вы хотите удалить запись??')) {
@@ -108,4 +104,4 @@
        });
 
     </script>
-    }
+}
