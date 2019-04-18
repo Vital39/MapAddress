@@ -28,18 +28,16 @@ namespace WebUI.Models
           
             foreach (var item in masReq)
             {
-                List<AddressDTO> mas = addressService.FindBy(x => x.StreetName.Contains(item)).ToList();
+              
+                List<AddressDTO> mas = (numHouse!=String.Empty) ? 
+                    addressService.FindBy(x => x.House.Contains(numHouse) && x.StreetName.Contains(item)).ToList() 
+                    : addressService.FindBy(x => x.StreetName.Contains(item)).ToList();
+                
                 if(mas!=null)
                     addresses.AddRange(mas);
 
             }
 
-            if (numHouse != String.Empty)
-            {
-                addresses.AddRange(addressService.FindBy(x => x.House.Contains(numHouse)).ToList());
-                filterAddresses = addresses.FindAll(x => FilterAddress(x.House, requestStr))
-                   .Select(x => x.StreetName + " " + x.House).ToList();
-            }
             if (addresses != null)
             {
                 filterAddresses.AddRange(addresses.FindAll(x => FilterAddress(x.StreetName, requestStr))
@@ -51,14 +49,17 @@ namespace WebUI.Models
             else return null;
 
         }
-        public bool FilterAddress(string value, string requestStr)
+        private bool FilterAddress(string value, string requestStr)
         {
-            var masRes = value.Split(new char[] { ' ','-','/' }, StringSplitOptions.RemoveEmptyEntries).Skip(1);
-
-            foreach (var item in masRes)
+            var masRes = value.Split(new char[] { ' ','-','/' }, StringSplitOptions.RemoveEmptyEntries);
+            var masReq = value.Split(new char[] { ' ', '-', '/' }, StringSplitOptions.RemoveEmptyEntries);
+            foreach (var res in masRes)
             {
-                if (item.ToLower().IndexOf(requestStr.ToLower()) == 0)
-                    return true;
+                foreach (var req in masReq)
+                {
+                    if (req.ToLower().IndexOf(res.ToLower()) == 0)
+                        return true;
+                }
             }
             return false;
         }
